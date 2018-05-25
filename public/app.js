@@ -3,6 +3,7 @@ $(function () {
     $("#loading-page").show();
     window.socket = io();
     $online_list = $("#online-list");
+    $sfx = new Audio("/appointed.mp3");
 
     window.socket.on("connect", () => {
         window.socketID = socket.id;
@@ -31,6 +32,7 @@ $(function () {
         });
         window.socket.off("new_message");
         window.socket.on("new_message", (meta) => {
+            $sfx.play();
             if($("#chat-container").hasClass("hide"))
                 openChat(meta.from);
             $bodyList = $(".chat-body ul");
